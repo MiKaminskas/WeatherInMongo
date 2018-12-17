@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
+
 @Slf4j
+@CrossOrigin(origins ="*")
 @RestController
 public class WeatherRestController {
     private WeatherManiuplate getterWeather;
@@ -20,12 +21,11 @@ public class WeatherRestController {
         this.repository = rep;
     }
 
+    @CrossOrigin
     @GetMapping("/greeting")
-    Weather returnWeather() throws IOException {
-        Weather obj = getterWeather.parser(getterWeather.downloadSmth());
-        repository.save(obj);
+    Weather returnWeather(@RequestParam(value="city", defaultValue="Vilnius") String cityName) throws IOException {
+        Weather obj = getterWeather.parser(getterWeather.downloadCityJson(cityName));
+        //repository.save(obj);
         return obj;
     }
-
-
 }

@@ -21,7 +21,7 @@ public class Weather {
     private List<Day> days;
 
 
-    private String temp;
+    //private String temp;
 
     @Override
     public String toString(){
@@ -40,7 +40,7 @@ public class Weather {
                 .append(" ")
                 .append(days.toString())
                 .append(" ")
-                .append(temp);
+                /*.append(temp)*/;
         return out.toString();
     }
 }

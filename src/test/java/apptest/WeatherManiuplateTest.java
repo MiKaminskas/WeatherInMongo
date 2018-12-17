@@ -1,9 +1,12 @@
 package apptest;
 
+import apptest.JsonModel.Day;
+import apptest.JsonModel.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 public class WeatherManiuplateTest {
@@ -11,7 +14,7 @@ public class WeatherManiuplateTest {
     @Test
     public void downloadSmth() {
         WeatherManiuplate weatherManiuplate = new WeatherManiuplate();
-        log.debug("everything is ok" + weatherManiuplate.downloadSmth());
+        log.debug("everything is ok" + weatherManiuplate.downloadCityJson("Vilnius"));
     }
     @Test
     public void parseWeatherOnTestJSON() throws IOException {
@@ -19,6 +22,11 @@ public class WeatherManiuplateTest {
 
         WeatherManiuplate weatherManiuplate = new WeatherManiuplate();
         log.debug("Hello! ");
-        log.debug(weatherManiuplate.parser(strExample).toString());
+
+        Weather ans = weatherManiuplate.parser(strExample);
+        List<Day> days= ans.getDays();
+        Day day = days.get(0);
+        log.debug(day.toString());
+        log.debug(day.getTemp().toString());
     }
 }
